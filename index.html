@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Punjabi Dhaba – Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #0f5132;
+    }
+
+    .box {
+      max-width: 420px;
+      background: #ffffff;
+      margin: 40px auto;
+      padding: 22px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0f5132;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    small {
+      display: block;
+      font-size: 12px;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: #ff8c00;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #thankYou {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    #thankYou h2 {
+      color: #0f5132;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="box">
+
+    <h1>Punjabi Dhaba</h1>
+
+    <p>
+      Your feedback helps us improve and serve you better.<br>
+      If you faced any issue, have a suggestion, or want to recommend a food item,
+      <b>feel free to tell us anything.</b>
+    </p>
+
+    <p>
+      We may also notify you about <b>special dishes</b> or <b>discounts</b>.
+    </p>
+
+    <!-- FORM -->
+    <form id="reviewForm">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+
+      <input type="tel" name="phone" placeholder="Phone Number (optional)">
+
+      <small>
+        Phone number is optional and will be used only for special dish or discount updates.
+        No spam.
+      </small>
+
+      <select name="rating" required>
+        <option value="">Select Rating</option>
+        <option value="5">★★★★★ Excellent</option>
+        <option value="4">★★★★ Very Good</option>
+        <option value="3">★★★ Good</option>
+        <option value="2">★★ Fair</option>
+        <option value="1">★ Poor</option>
+      </select>
+
+      <textarea
+        name="review"
+        placeholder="Share your issue, suggestion, or food recommendation (optional)">
+      </textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <!-- THANK YOU -->
+    <div id="thankYou">
+      <h2>🙏 Thank You!</h2>
+      <p>
+        Your feedback has been received successfully.<br>
+        We really appreciate your time.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- INLINE SCRIPT (NO FILE PATH ISSUES) -->
+  <script>
+    document.getElementById("reviewForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // stop refresh
+
+      document.getElementById("reviewForm").style.display = "none";
+      document.getElementById("thankYou").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
