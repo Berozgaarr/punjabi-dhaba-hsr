@@ -131,8 +131,8 @@
 
   </div>
 
-  <!-- INLINE SCRIPT (NO FILE PATH ISSUES) -->
-<script>
+  <!-- INLINE SCRIPT (NO FILE PATH ISSUES) --> 
+   <script>
   const form = document.getElementById("reviewForm");
 
   form.addEventListener("submit", function (e) {
@@ -147,19 +147,17 @@
 
     fetch("https://script.google.com/macros/s/AKfycbzR13zlaVJDias6SqdKhuVqSE8cMcWdEu61j6-gCjXfhf-kfm57mt6KBknh3oR_Dww/exec", {
       method: "POST",
-      body: JSON.stringify(data),
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json"
-      }
-    })
-    .then(() => {
-      form.reset();
-      form.style.display = "none";
-      document.getElementById("thankYou").style.display = "block";
-    })
-    .catch(() => {
-      alert("Something went wrong. Please try again.");
+      },
+      body: JSON.stringify(data)
     });
+
+    // Always show thank you (because no-cors has no response)
+    form.reset();
+    form.style.display = "none";
+    document.getElementById("thankYou").style.display = "block";
   });
 </script>
 
