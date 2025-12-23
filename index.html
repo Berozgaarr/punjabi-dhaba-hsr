@@ -137,21 +137,19 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const ratingValue = form.rating.value;
+    const ratingText = form.rating.options[form.rating.selectedIndex].text;
 
     const data = {
       name: form.name.value,
       phone: form.phone.value,
-      rating: ratingValue,
+      rating: ratingText,
       review: form.review.value
     };
 
     fetch("PASTE_YOUR_APPS_SCRIPT_URL_HERE", {
       method: "POST",
       mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
 
@@ -159,15 +157,16 @@
     form.style.display = "none";
     document.getElementById("thankYou").style.display = "block";
 
-    // ⭐⭐⭐⭐–⭐⭐⭐⭐⭐ → Google Review redirect
-    if (ratingValue === "Excellent" || ratingValue === "Very Good") {
+    // ⭐⭐⭐⭐ or ⭐⭐⭐⭐⭐ → redirect
+    if (ratingText.includes("★★★★★") || ratingText.includes("★★★★")) {
       setTimeout(() => {
         window.location.href =
           "https://www.google.com/maps/place/Punjabi+Dhaba/@12.9207725,77.6466935,17z/data=!4m8!3m7!1s0x3bae154657d12805:0x3eb70762f842b27c!8m2!3d12.9207673!4d77.6492684!9m1!1b1!16s%2Fg%2F11qn11f_4p";
-      }, 2500);
+      }, 2000);
     }
   });
 </script>
+
 
 
 
