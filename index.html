@@ -120,24 +120,40 @@
       <button type="submit">Submit Feedback</button>
     </form>
 
-    <!-- THANK YOU -->
-    <div id="thankYou">
-      <h2>🙏 Thank You!</h2>
-      <p>
-        Your feedback has been received successfully.<br>
-        We really appreciate your time.
-      </p>
+    <!-- THANK YOU --><div id="thankYou" style="display:none;">
+  <h2>🙏 Thank you!</h2>
+
+  <p>
+    Your feedback has been received.<br>
+    We use this privately to improve our food & service.
+  </p>
+
+  <p style="margin-top:12px;">
+    If you enjoyed your meal, you may also leave a
+    <strong>quick Google review</strong> — it really helps us grow.
+  </p>
+</div>
+
+
+
+
+
     </div>
 
   </div>
 
-  <!-- INLINE SCRIPT (NO FILE PATH ISSUES) --> <script>
+  <!-- INLINE SCRIPT (NO FILE PATH ISSUES) --><script>
   const form = document.getElementById("reviewForm");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const ratingText = form.rating.options[form.rating.selectedIndex].text;
+    const btn = form.querySelector("button");
+    btn.disabled = true;
+    btn.innerText = "Submitting...";
+
+    const ratingText =
+      form.rating.options[form.rating.selectedIndex].text;
 
     const data = {
       name: form.name.value,
@@ -146,26 +162,31 @@
       review: form.review.value
     };
 
-    fetch("PASTE_YOUR_APPS_SCRIPT_URL_HERE", {
+    // SEND TO GOOGLE SHEET
+    fetch("https://script.google.com/macros/s/AKfycbzR13zlaVJDias6SqdKhuVqSE8cMcWdEu61j6-gCjXfhf-kfm57mt6KBknh3oR_Dww/exec", {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(data)
     });
 
+    // SHOW THANK YOU
     form.reset();
     form.style.display = "none";
     document.getElementById("thankYou").style.display = "block";
 
-    // ⭐⭐⭐⭐ or ⭐⭐⭐⭐⭐ → redirect
+    // GOOGLE REVIEW REDIRECT (ONLY FOR HAPPY CUSTOMERS)
     if (ratingText.includes("★★★★★") || ratingText.includes("★★★★")) {
       setTimeout(() => {
         window.location.href =
           "https://www.google.com/maps/place/Punjabi+Dhaba/@12.9207725,77.6466935,17z/data=!4m8!3m7!1s0x3bae154657d12805:0x3eb70762f842b27c!8m2!3d12.9207673!4d77.6492684!9m1!1b1!16s%2Fg%2F11qn11f_4p";
-      }, 2000);
+      }, 2500);
     }
   });
 </script>
+
 
 
 
